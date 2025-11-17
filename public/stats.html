@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Статистика задач · TaskTrackr</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Пропустить к содержимому</a>
+    <header>
+      <div class="header-inner">
+        <button class="mobile-nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">☰</button>
+        <div class="brand">
+          <h1>TaskTrackr · Статистика</h1>
+          <span id="greeting"></span>
+        </div>
+        <div class="header-actions">
+          <nav id="site-nav">
+            <ul>
+              <li><a class="nav-link" href="index.html">Главная</a></li>
+              <li><a class="nav-link active" href="stats.html">Статистика</a></li>
+              <li><a class="nav-link" href="about.html">О сервисе</a></li>
+            </ul>
+          </nav>
+          <div class="auth-panel" id="auth-panel" aria-live="polite">
+            <div class="auth-panel-text">
+              <span id="auth-panel-title">Гость</span>
+              <small id="auth-panel-subtitle"
+                >Войдите, чтобы увидеть задачи</small
+              >
+            </div>
+            <a
+              id="auth-login-link"
+              class="auth-link-btn"
+              href="index.html#auth-section"
+              >Войти</a
+            >
+            <button
+              id="auth-logout-btn"
+              class="secondary auth-link-btn"
+              hidden
+            >
+              Выйти
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+  <main id="main-content">
+        <section id="stats-locked" class="auth-locked">
+          <h2>Войдите, чтобы построить статистику</h2>
+          <p>
+            Мы считаем показатели по вашим задачам. Сначала авторизуйтесь на
+            главной странице.
+          </p>
+          <a class="auth-link-btn" href="index.html#auth-section"
+            >Перейти к авторизации</a
+          >
+        </section>
+
+        <section data-auth-guard="required">
+          <h2 id="overview">Общий обзор</h2>
+          <p class="section-subtitle">
+            Сводные показатели по задачам (данные вычисляются на клиенте).
+          </p>
+
+          <div class="stats-grid">
+            <div class="stats-card">
+              <div class="stats-label">Всего задач</div>
+              <div id="stat-total" class="stats-value">0</div>
+            </div>
+            <div class="stats-card">
+              <div class="stats-label">В работе</div>
+              <div id="stat-in-progress" class="stats-value">0</div>
+            </div>
+            <div class="stats-card">
+              <div class="stats-label">Завершённые</div>
+              <div id="stat-done" class="stats-value">0</div>
+            </div>
+            <div class="stats-card">
+              <div class="stats-label">Без дедлайна</div>
+              <div id="stat-without-due" class="stats-value">0</div>
+            </div>
+          </div>
+
+          <p class="section-subtitle">
+            Показатели обновляются при каждом запросе списка задач с сервера.
+          </p>
+        </section>
+
+        <section data-auth-guard="required">
+          <h2 id="table">Таблица с агрегатами</h2>
+          <p class="section-subtitle">
+            Таблица категорий с вложенной таблицей по статусам.
+          </p>
+
+          <div class="table-responsive aggregates-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Категория</th>
+                <th>Всего</th>
+                <th>Вложенные данные</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Учёба</td>
+                <td id="cat-study-total">0</td>
+                <td>
+                  <table class="nested-table">
+                    <thead>
+                      <tr>
+                        <th>Статус</th>
+                        <th>Кол-во</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>todo</td>
+                        <td id="cat-study-todo">0</td>
+                      </tr>
+                      <tr>
+                        <td>in-progress</td>
+                        <td id="cat-study-in-progress">0</td>
+                      </tr>
+                      <tr>
+                        <td>done</td>
+                        <td id="cat-study-done">0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>Проекты</td>
+                <td id="cat-project-total">0</td>
+                <td>
+                  <table class="nested-table">
+                    <thead>
+                      <tr>
+                        <th>Статус</th>
+                        <th>Кол-во</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>todo</td>
+                        <td id="cat-project-todo">0</td>
+                      </tr>
+                      <tr>
+                        <td>in-progress</td>
+                        <td id="cat-project-in-progress">0</td>
+                      </tr>
+                      <tr>
+                        <td>done</td>
+                        <td id="cat-project-done">0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+
+          <p class="section-subtitle">
+            Для примера категории считаются по ключевым словам в названии
+            задачи («ЕГЭ», «курс», «проект» и т.п.).
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <p>
+          <a href="#overview">К началу страницы</a> ·
+          <a href="index.html#tasks-section">К таблице задач</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

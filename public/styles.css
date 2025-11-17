@@ -1,0 +1,1378 @@
+:root {
+  --bg-color: #f5f7ff;
+  --bg-elevated: #ffffff;
+  --primary: #817ff5;
+  --primary-dark: #4f46e5;
+  --accent: #f97316;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border-subtle: #e5e7eb;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+}
+
+/* Responsive root font size for smoother scaling on mobile */
+html {
+  /* slightly larger base for overall better readability */
+  font-size: clamp(15px, 1.9vw, 18px);
+}
+
+/* Skip-to-content link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+  width: auto;
+  height: auto;
+  padding: 0.35rem 0.6rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 6px;
+  z-index: 1100;
+}
+
+/* Базовые стили */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  background: radial-gradient(circle at top left, #e0f2fe 0, var(--bg-color) 45%, #eef2ff 100%);
+  color: var(--text);
+}
+
+a {
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Лейаут страницы */
+
+.page-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+/* Header + навигация */
+
+header {
+  background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+  color: #fff;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+}
+
+.header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex: 0 1 auto;
+  justify-content: flex-end;
+}
+
+/* hide mobile toggle by default (shown only on small screens) */
+.mobile-nav-toggle {
+  display: none;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1 1 auto;
+  min-width: 220px;
+}
+
+.brand span {
+  font-size: 0.85rem;
+  color: rgba(249, 250, 251, 0.85);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+.auth-panel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.15);
+  flex: 0 0 auto;
+}
+
+.auth-panel-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.auth-panel-text span {
+  font-weight: 600;
+  color: #fff;
+}
+
+.auth-panel-text small {
+  font-size: 0.75rem;
+  color: rgba(249, 250, 251, 0.8);
+}
+
+.auth-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  min-width: 72px;
+}
+
+.auth-link-btn.secondary,
+.auth-panel button.auth-link-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.auth-panel button {
+  cursor: pointer;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.auth-panel button:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.auth-link-btn:hover {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.header-actions nav {
+  flex: 0 1 auto;
+  min-width: 260px;
+}
+
+nav ul {
+  display: flex;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+}
+
+.nav-link {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  color: rgba(249, 250, 251, 0.9);
+  background: transparent;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.nav-link:hover {
+  background: rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: #fff;
+  color: var(--primary-dark);
+}
+
+/* Приветствие */
+
+#greeting {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: rgba(249, 250, 251, 0.85);
+}
+
+/* Основной контент: grid‑области (главная) */
+
+main {
+  margin-top: 1.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+  grid-template-areas:
+    "auth auth"
+    "form form"
+    "tasks tasks";
+  gap: 1.5rem;
+}
+
+main > section {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+/* Привязка секций к областям: используем id-атрибуты, чтобы порядок секций не имел значения */
+
+main > section#theory-section {
+  grid-area: theory;
+}
+
+main > section#auth-section {
+  grid-area: auth;
+}
+
+main > section#auth-locked {
+  grid-area: tasks;
+}
+
+main > section#form-section {
+  grid-area: form;
+}
+
+#tasks-section {
+  grid-area: tasks;
+}
+
+#auth-section {
+  padding-bottom: 1.5rem;
+}
+
+.auth-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.auth-card {
+  background: linear-gradient(145deg, #eef2ff, #ffffff);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auth-card h3 {
+  margin: 0;
+}
+
+.auth-card button {
+  align-self: flex-start;
+}
+
+.auth-locked {
+  border: 2px dashed rgba(129, 127, 245, 0.5);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  background: rgba(129, 127, 245, 0.08);
+}
+
+#tasks-section {
+  grid-area: tasks;
+}
+
+/* Заголовки */
+
+h2 {
+  margin-top: 0;
+  font-size: 1.35rem;
+}
+
+.section-subtitle {
+  margin: 0.2rem 0 0.7rem;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+}
+
+/* Списки */
+
+ul,
+ol,
+dl {
+  margin-top: 0.5rem;
+}
+
+/* Таблица задач */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+thead th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: #f9fafb;
+}
+
+tbody tr:hover {
+  background: #f3f4ff;
+}
+
+/* Кнопки */
+
+button {
+  cursor: pointer;
+  border-radius: 999px;
+  border: none;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: var(--primary);
+  color: #fff;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
+}
+
+button.secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+button.secondary:hover {
+  background: #d1d5db;
+  transform: scale(1.05);
+}
+
+/* Форма */
+
+form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+input,
+textarea,
+select {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid rgba(129, 127, 245, 0.4);
+  border-color: var(--primary);
+}
+
+.error {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #b91c1c;
+}
+
+/* Блок JSON/XML */
+
+pre {
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  overflow-x: auto;
+}
+
+/* Footer */
+
+footer {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem 1.5rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Модальное окно */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.visible {
+  display: flex;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem 1.4rem;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+  position: relative;
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+.modal pre {
+  max-height: 200px;
+  overflow: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #e5e7eb;
+  color: #111827;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.15);
+}
+
+.modal-close:hover {
+  background: #d1d5db;
+}
+
+/* Stats page: карточная сетка */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stats-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  padding: 0.9rem 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Action buttons in tasks table: uniform, pill-shaped, same size */
+#tasks-table td {
+  vertical-align: middle;
+}
+
+#tasks-table tr.empty-row td {
+  text-align: center;
+  padding: 1.2rem 0;
+  color: var(--text-muted);
+}
+
+#tasks-table td button {
+  /* slightly smaller visual style for both "Готово" and "Удалить" */
+  padding: 0.35rem 0.7rem;
+  min-width: 72px;
+  height: 34px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.10);
+  transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+/* Force action buttons to the same width so they appear uniform */
+.action-buttons > button,
+#tasks-table td:last-child > button {
+  width: 92px;
+  box-sizing: border-box;
+}
+
+/* Use the primary palette for action buttons; secondary class will no longer change size/style */
+#tasks-table td button,
+#tasks-table td button.secondary {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+}
+
+#tasks-table td button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.12);
+}
+
+/* Make the delete button slightly desaturated on active to hint destructive action without changing shape */
+#tasks-table td button.secondary:active {
+  filter: brightness(0.95) saturate(0.9);
+}
+
+/* small horizontal gap between adjacent action buttons */
+#tasks-table td button + button {
+  margin-left: 0.4rem;
+}
+
+/* Ensure the actions cell arranges buttons inline and prevents wrapping */
+#tasks-table td:last-child {
+  flex-direction: row;
+  gap: 0.4rem;
+  justify-content: flex-end;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* container for action buttons so we can measure its width/position */
+.action-buttons {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+/* header text element that we will translate to align above the button-group */
+th.actions-header {
+  position: relative;
+  text-align: center; /* baseline: center text */
+}
+.actions-header-text {
+  display: inline-block;
+  transition: transform 140ms ease;
+  will-change: transform;
+}
+
+/* On very narrow screens stack them vertically but keep spacing */
+@media (max-width: 520px) {
+  #tasks-table td:last-child {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  #tasks-table td button {
+    min-width: 64px;
+    height: 32px;
+    padding: 0.28rem 0.6rem;
+  }
+
+  /* When buttons are wrapped in .action-buttons we need to stack them there as well */
+  .action-buttons {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  /* ensure buttons keep a small vertical gap when stacked */
+  .action-buttons > button {
+    display: inline-flex;
+    width: 84px; /* slightly narrower on small screens */
+  }
+}
+
+/* On very narrow devices make buttons full-width for readability and touch targets */
+@media (max-width: 380px) {
+  .action-buttons > button,
+  #tasks-table td:last-child > button {
+    width: 100%;
+  }
+}
+
+/* Desktop: align the Actions header and buttons to the left for better visual grouping */
+@media (min-width: 900px) {
+  /* Center the 'Действия' header above the button group, keep buttons aligned to the right */
+  #tasks-table thead th:last-child {
+    text-align: center;
+    padding-left: 0.6rem;
+  }
+
+  #tasks-table td:last-child {
+    justify-content: flex-end;
+    padding-right: 1rem;
+  }
+}
+
+.stats-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.stats-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* About: двухколоночный текст */
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr);
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.about-card {
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.15rem;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Адаптив: планшеты и средние экраны */
+
+@media (max-width: 1024px) {
+  .page-wrapper {
+    max-width: 100%;
+    padding: 1.25rem 1rem 2.5rem;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  header h1 {
+    font-size: 1.25rem;
+  }
+
+  nav ul {
+    justify-content: flex-start;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "theory"
+      "form"
+      "tasks";
+    gap: 1rem;
+  }
+}
+
+/* Make the form section wider and more visually appealing when there is no theory column
+   - span the form across both columns on large screens
+   - center the content and use a two-column form layout on medium+ screens
+*/
+@media (min-width: 900px) {
+  /* let the form take the full page width (within page-wrapper) */
+  main > section#form-section {
+    grid-column: 1 / -1;
+    /* almost full viewport width but with a sensible cap */
+    width: min(1200px, 95vw);
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.25rem 1.6rem 1.6rem;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  main > section#auth-section,
+  main > section#auth-locked {
+    grid-column: 1 / -1;
+    width: min(1200px, 95vw);
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Ensure tasks section matches the form width and is centered */
+  main > section#tasks-section {
+    grid-column: 1 / -1;
+    width: min(1200px, 95vw);
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.15rem 1.6rem 1.4rem;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  /* nicer two-column form layout */
+  #form-section form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1rem;
+    align-items: start;
+  }
+
+  /* make label blocks span correctly */
+  #form-section label {
+    display: block;
+    font-size: 0.95rem;
+  }
+
+  /* most controls should span one column, description spans both */
+  /* keep textarea in its column so it matches the width of the title input */
+  #form-section label textarea {
+    width: 100%;
+    min-height: 88px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  /* Make title input visually identical to the description box
+     - same height, padding and border-box sizing so they look like matching fields */
+  #form-section input[type="text"],
+  #form-section textarea {
+    padding: 0.6rem 0.8rem 0.35rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    background: #fff;
+    font: inherit;
+  }
+
+  /* Ensure the single-line title input has the same visual height as textarea */
+  #form-section input[type="text"] {
+    min-height: 88px;
+    line-height: 1.2;
+    vertical-align: top;
+  }
+
+  /* position some fields to be side-by-side */
+  #form-section label[for],
+  #form-section label input,
+  #form-section label select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* make date and status fields sit next to each other */
+  #form-section label:has(input[type="date"]),
+  #form-section label:has(select[name="status"]) {
+    grid-column: auto;
+  }
+
+  /* place the submit button full-width under the fields */
+  #form-section button[type="submit"] {
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* fallback for browsers that don't support :has() - ensure textarea spans full width */
+@supports not (selector(:has(*))) {
+  #form-section textarea {
+    width: 100%;
+  }
+}
+
+/* Адаптив: телефоны — упрощённый вид и новый порядок */
+
+@media (max-width: 640px) {
+  body {
+    background: #f3f4f6;
+  }
+
+  /* Improve readability on phones: slightly larger base font and more line-height */
+  html {
+    font-size: 16px; /* override clamp for small screens */
+  }
+  body {
+    line-height: 1.55;
+  }
+
+  /* Make form controls and buttons a bit larger for touch readability */
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 0.95rem;
+  }
+
+  .page-wrapper {
+    padding: 0.75rem 0.75rem 1.5rem;
+  }
+
+  header {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .header-inner {
+    padding: 0.9rem 0.9rem 1rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+  }
+
+  .brand span {
+    font-size: 0.8rem;
+  }
+
+  /* Make brand flexible and truncate long title on narrow screens */
+  .brand {
+    flex: 1 1 auto;
+    min-width: 0; /* allow truncation */
+  }
+
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.65rem;
+    order: 4;
+  }
+
+  .auth-panel {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .auth-panel-text {
+    flex: 1 1 auto;
+  }
+
+  .brand h1 {
+    margin: 0;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    /* Hide full nav on small screens by default; use toggle */
+    display: none;
+  }
+
+  .nav-link {
+    padding: 0.25rem 0.65rem;
+    font-size: 0.82rem;
+  }
+
+  /* Mobile menu toggle button (visible on small screens) */
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: rgba(249,250,251,0.95);
+    font-size: 1.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    order: 2;
+    margin-left: auto; /* keep toggle pinned to the right */
+  }
+
+  /* Position header-inner relative so the dropdown nav can be positioned */
+  .header-inner {
+    position: relative;
+  }
+
+  /* Dropdown-style nav: absolute, full-width under the header on mobile */
+  nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 0.35rem);
+    display: none; /* hidden by default, shown when .nav-open is present */
+    background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+    padding: 0.65rem;
+    border-radius: 0 0 calc(var(--radius-md)) calc(var(--radius-md));
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    z-index: 1050;
+  }
+
+  /* When open, show the nav vertically and expand links to full width */
+  .header-inner.nav-open nav {
+    display: block;
+  }
+
+  /* nicer toggle appearance */
+  .mobile-nav-toggle {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+    transition: background 0.15s ease, transform 0.08s ease;
+  }
+  .mobile-nav-toggle:active {
+    transform: scale(0.98);
+  }
+
+  /* show a smooth slide-down when opening the mobile nav (respects reduced motion) */
+  @keyframes navSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .header-inner.nav-open nav {
+    animation: navSlideDown 220ms cubic-bezier(.2,.9,.2,1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .header-inner.nav-open nav {
+      animation: none !important;
+    }
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  nav .nav-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(249,250,251,0.95);
+  }
+
+  nav .nav-link.active {
+    background: #fff;
+    color: var(--primary-dark);
+  }
+
+  main {
+    margin-top: 1rem;
+    grid-template-columns: 1fr;
+    /* Порядок: форма → задачи → теория */
+    grid-template-areas:
+      "auth"
+      "form"
+      "tasks"
+      "theory";
+    gap: 0.75rem;
+  }
+
+  main > section {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    padding: 0.85rem 0.9rem 1rem;
+  }
+
+  h2 {
+    font-size: 1.05rem;
+  }
+
+  .auth-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .section-subtitle {
+    font-size: 0.8rem;
+  }
+
+  ul,
+  ol,
+  dl {
+    margin-top: 0.35rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  /* Make task list text match the rest of the UI on phones */
+  #tasks-table,
+  .table-responsive table {
+    font-size: 0.98rem; /* slightly larger for readability */
+  }
+
+  /* Ensure values inside td-value follow the same size */
+  .table-responsive td .td-value {
+    font-size: inherit;
+  }
+
+  /* Make the table wrapper scrollable horizontally on phones and allow smooth touch scrolling */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Keep table as a table but responsive: allow hiding less-important columns on small screens */
+  .table-responsive table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  /* On narrow screens hide Category (2) and Deadline (4) columns to prevent layout squeeze */
+  @media (max-width: 520px) {
+    /* Keep columns: 1 - Название, 3 - Статус, 4 - Дедлайн
+       Hide: 2 - Категория, 5 (last) - Действия */
+    #tasks-table thead th:nth-child(2),
+    #tasks-table tbody td:nth-child(2),
+    #tasks-table thead th:last-child,
+    #tasks-table tbody td:last-child {
+      display: none;
+    }
+
+    /* Stack action buttons vertically and keep them right-aligned */
+    #tasks-table td.action-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.45rem;
+    }
+
+    .action-buttons {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-end;
+    }
+  }
+
+  /* Constrain action button group so it doesn't overflow viewport on very small screens */
+  .action-buttons {
+    max-width: 140px;
+    justify-content: flex-end;
+  }
+
+  /* Slightly smaller action buttons on phones */
+  #tasks-table td button {
+    padding: 0.22rem 0.5rem;
+    min-width: 56px;
+    height: 30px;
+    font-size: 0.82rem;
+  }
+
+  /* On very narrow devices make buttons full-width for readability and touch targets */
+  @media (max-width: 380px) {
+    .action-buttons {
+      width: 100%;
+      max-width: none;
+      align-items: stretch;
+    }
+    .action-buttons > button {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  /* Respect safe area on iPhone (bottom) so footer and controls are not hidden by home indicator */
+  .page-wrapper {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+
+  th,
+  td {
+    padding: 0.4rem 0.45rem;
+  }
+
+  button {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  footer {
+    padding: 0.7rem 0.75rem 1rem;
+    font-size: 0.78rem;
+    border-top: none;
+  }
+
+  .modal {
+    max-width: 95%;
+    padding: 0.9rem 1rem 1.1rem;
+    border-radius: 12px;
+  }
+
+  /* Статистика: одна колонка, компактные карточки */
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .stats-card {
+    padding: 0.85rem 0.9rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  }
+
+  .stats-value {
+    font-size: 1.3rem;
+  }
+
+  .stats-label {
+    font-size: 0.8rem;
+  }
+
+  /* О сервисе: одна колонка вместо двух */
+
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .about-card {
+    padding: 0.85rem 0.9rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  }
+
+  .about-card h2 {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .about-card p,
+  .about-card li {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+
+/* Адаптив: очень маленькие телефоны */
+
+@media (max-width: 400px) {
+  .page-wrapper {
+    padding: 0.6rem 0.55rem 1.4rem;
+  }
+
+  header h1 {
+    font-size: 1rem;
+  }
+
+  nav ul {
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    padding: 0.22rem 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  main > section {
+    padding: 0.7rem 0.8rem 0.9rem;
+  }
+
+  table {
+    font-size: 0.75rem;
+  }
+
+  /* Slightly larger base on very small phones */
+  html {
+    font-size: 17px;
+  }
+
+  th,
+  td {
+    padding: 0.35rem 0.35rem;
+  }
+  /* Тонкая настройка таблицы с агрегатами на странице "Статистика" */
+
+/* внешний контейнер таблицы-агрегата */
+.aggregates-table {
+  font-size: 0.9rem;
+}
+
+/* вложенные таблицы по статусам */
+.aggregates-table .nested-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.aggregates-table .nested-table th,
+.aggregates-table .nested-table td {
+  padding: 0.35rem 0.45rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.aggregates-table .nested-table thead th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* небольшое расстояние между блоками категорий */
+.aggregates-table .category-block {
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.45);
+  margin-bottom: 0.6rem;
+}
+
+/* мобильная подстройка для очень узких экранов */
+@media (max-width: 480px) {
+  .aggregates-table {
+    font-size: 0.85rem;
+  }
+
+  .aggregates-table .nested-table {
+    font-size: 0.8rem;
+  }
+
+  .aggregates-table .nested-table th,
+  .aggregates-table .nested-table td {
+    padding: 0.3rem 0.3rem;
+  }
+}
+
+}
+/* --------------------------------------------------
+   Mobile optimizations (performance, touch targets)
+   - lighter shadows / radii on small screens
+   - make images/media fluid
+   - improve touch target sizes for buttons/links
+   - make wide tables horizontally scrollable
+   - respect prefers-reduced-motion
+-------------------------------------------------- */
+
+@media (max-width: 640px) {
+  /* soften heavy visual styles on mobile for performance and clarity */
+  :root {
+    --radius-lg: 10px;
+    --radius-md: 6px;
+    --shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.08);
+  }
+
+  /* tap optimizations */
+  button,
+  .nav-link {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    min-height: 40px; /* larger, easier to tap */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* a little more breathing room in inputs for touch */
+  input,
+  textarea,
+  select {
+    padding: 0.5rem 0.7rem;
+  }
+
+  /* make media scale to container and avoid overflow */
+  img,
+  svg,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* responsive table wrapper for small screens */
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* hint to browsers to avoid font-size auto-zoom on form focus */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* reduce complex background on very small screens (already set elsewhere, but this ensures fallback) */
+  @media (max-width: 480px) {
+    body {
+      background: var(--bg-color);
+    }
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* global responsive helper: use .table-responsive around wide tables in markup */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; 
+}  
+}

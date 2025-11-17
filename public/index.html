@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+  
+    <title>Учёт задач</title>
+
+    <style>
+      .inline-example {
+        color: #ffe8b3;
+      }
+    </style>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Пропустить к содержимому</a>
+
+    <header>
+      
+      <div class="header-inner">
+        <button class="mobile-nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">☰</button>
+        <div class="brand">
+          <h1>TaskTrackr · Учёт задач</h1>
+          <span id="greeting"></span>
+        </div>
+        <div class="header-actions">
+          <nav id="site-nav">
+            <ul>
+              <li><a class="nav-link active" href="index.html">Главная</a></li>
+              <li><a class="nav-link" href="stats.html">Статистика</a></li>
+              <li><a class="nav-link" href="about.html">О сервисе</a></li>
+            </ul>
+          </nav>
+          <div class="auth-panel" id="auth-panel" aria-live="polite">
+            <div class="auth-panel-text">
+              <span id="auth-panel-title">Гость</span>
+              <small id="auth-panel-subtitle"
+                >Войдите, чтобы увидеть задачи</small
+              >
+            </div>
+            <a
+              id="auth-login-link"
+              class="auth-link-btn"
+              href="#auth-section"
+              >Войти</a
+            >
+            <button
+              id="auth-logout-btn"
+              class="secondary auth-link-btn"
+              hidden
+            >
+              Выйти
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-wrapper">
+  <main id="main-content">
+        <section id="auth-section">
+          <h2>Авторизация</h2>
+          <p class="section-subtitle">
+            Создайте аккаунт или войдите, чтобы работать со своими задачами.
+          </p>
+          <div class="auth-columns">
+            <form id="login-form" class="auth-card">
+              <h3>Вход</h3>
+              <label>
+                Email
+                <input type="email" name="email" required />
+              </label>
+              <label>
+                Пароль
+                <input type="password" name="password" required minlength="6" />
+              </label>
+              <button type="submit">Войти</button>
+              <p id="login-error" class="error" hidden></p>
+            </form>
+            <form id="register-form" class="auth-card">
+              <h3>Регистрация</h3>
+              <label>
+                Имя
+                <input type="text" name="name" required minlength="2" />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" required />
+              </label>
+              <label>
+                Пароль
+                <input type="password" name="password" required minlength="6" />
+              </label>
+              <button type="submit">Создать аккаунт</button>
+              <p id="register-error" class="error" hidden></p>
+            </form>
+          </div>
+        </section>
+
+        <section id="auth-locked" class="auth-locked">
+          <h2>Только для авторизованных пользователей</h2>
+          <p>
+            После входа здесь появится форма создания задач и ваш персональный
+            список.
+          </p>
+        </section>
+     
+
+        <section id="form-section" data-auth-guard="required">
+          <h2>Добавить задачу</h2>
+          <p class="section-subtitle">
+            Заполни форму и задача появится в списке ниже и в базе данных.
+          </p>
+
+          <form id="task-form">
+            <label>
+              Название задачи
+              <textarea
+                name="title"
+                id="title-input"
+                required
+                minlength="3"
+                rows="1"
+                placeholder="Например: Сделать курсовую работу"
+              ></textarea>
+            </label>
+
+            <label>
+              Описание
+              <textarea
+                name="description"
+                rows="3"
+                placeholder="Например: сделать курсовую работу по веб‑разработке, разработать фронтенд и бэкенд"
+              ></textarea>
+            </label>
+
+            <label>
+              Категория
+              <select name="category">
+                <option value="study">Учебная</option>
+                <option value="work">Рабочая</option>
+                <option value="practice">Практика</option>
+                <option value="personal">Личная</option>
+              </select>
+            </label>
+
+            <label>
+              Дедлайн
+              <input type="date" name="dueDate" />
+            </label>
+
+            <label>
+              Статус
+              <select name="status">
+                <option value="todo">Запланировано</option>
+                <option value="in-progress">В работе</option>
+                <option value="done">Готово</option>
+              </select>
+            </label>
+
+            <button type="submit">Создать задачу</button>
+            <p id="form-error" class="error" hidden></p>
+          </form>
+        </section>
+
+        <section id="tasks-section" data-auth-guard="required">
+          <h2>Список задач</h2>
+          <p class="section-subtitle">
+            Нажмите на строку в таблице, чтобы открыть подробности задачи.
+          </p>
+
+          <!-- toggle button removed per request -->
+
+          <div class="table-responsive">
+          <table id="tasks-table">
+            <thead>
+              <tr>
+                <th>Название</th>
+                <th>Категория</th>
+                <th>Статус</th>
+                <th>Дедлайн</th>
+                <th class="actions-header"><span class="actions-header-text">Действия</span></th>
+              </tr>
+            </thead>
+            <tbody id="tasks-body">
+              <!-- JS вставит строки -->
+            </tbody>
+          </table>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p class="inline-example">
+          © 2025 TaskTrackr · учебный сервис учёта задач.
+        </p>
+        <p>
+          Документация по HTML/CSS/JS:
+          <a href="https://developer.mozilla.org/" target="_blank"
+            >MDN Web Docs</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <!-- Модальное окно с деталями задачи -->
+    <div id="task-modal-overlay" class="modal-overlay">
+      <div class="modal">
+        <button class="modal-close" id="task-modal-close">×</button>
+        <h3 id="modal-title">Задача</h3>
+
+        <p><strong>Категория:</strong> <span id="modal-category">—</span></p>
+        <p><strong>Статус:</strong> <span id="modal-status">—</span></p>
+        <p><strong>Дедлайн:</strong> <span id="modal-due">—</span></p>
+        <p><strong>Описание:</strong></p>
+        <p id="modal-description">—</p>
+
+        <h4>JSON</h4>
+        <pre id="modal-json">{}</pre>
+
+        <h4>XML</h4>
+        <pre id="modal-xml"></pre>
+      </div>
+    </div>
+  </body>
+</html>
